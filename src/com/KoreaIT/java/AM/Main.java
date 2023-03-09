@@ -67,7 +67,49 @@ public class Main {
 							articlefound.body, articlefound.regDate, articlefound.updateDate, articlefound.hit);
 
 				}
-			
+			} else if (command.startsWith("article delete ")) {
+				String[] delete = command.split(" ");
+
+				int 번호 = Integer.parseInt(delete[2]);
+
+				Article articlefound = null;
+
+				for (int i = 0; i < articles.size(); i++) {
+					Article article = articles.get(i);
+					if (article.id == 번호) {
+						articlefound = article;
+						break;
+					}
+				}
+				if (articlefound == null) {
+					System.out.printf("%d번 게시물은 존재하지 않습니다.\n", 번호);
+				} else {
+					articles.remove(articlefound);
+					System.out.printf("%d번 게시물이 삭제되었습니다.\n", 번호);
+				}
+			} else if (command.startsWith("article modify ")) {
+				String[] modify = command.split(" ");
+				int 번호 = Integer.parseInt(modify[2]);
+				Article articlefound = null;
+
+				for (int i = 0; i < articles.size(); i++) {
+					Article article = articles.get(i);
+					if (article.id == 번호) {
+						articlefound = article;
+						break;
+					}
+				}
+				if (articlefound == null) {
+					System.out.printf("%d번 게시물은 존재하지 않습니다.\n", 번호);
+				} else {
+					System.out.printf("제목 : ");
+					String title2 = sc.nextLine();
+					System.out.printf("내용 : ");
+					String body2 = sc.nextLine();
+
+					articlefound.modifyArticle(번호, title2, body2, nowdate, nowdate);
+					System.out.printf("%d번 글이 수정되었습니다.\n", 번호);
+				}
 			} else if (command.equals("article write")) {
 				int id = lastArticleId + 1;
 				System.out.printf("제목 : ");
