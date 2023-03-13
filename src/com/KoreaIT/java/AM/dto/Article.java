@@ -3,7 +3,6 @@ package com.KoreaIT.java.AM.dto;
 public class Article extends Dto {
 	public String title;
 	public String body;
-	
 	public int hit;
 
 	public Article(int id, String title, String body, String regDate, String updateDate) {

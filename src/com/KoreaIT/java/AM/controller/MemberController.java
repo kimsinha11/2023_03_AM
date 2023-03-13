@@ -6,17 +6,34 @@ import java.util.Scanner;
 import com.KoreaIT.java.AM.dto.Member;
 import com.KoreaIT.java.AM.util.Util;
 
-public class MemberController {
+public class MemberController extends Controller{
 	List<Member> members;
 	private Scanner sc;
-
+	private String command;
+	private String actionMethodName;
+	
 	public MemberController(List<Member> members, Scanner sc) {
 		this.members = members;
 		this.sc = sc;
 	}
+	public void doAction(String actionMethodName, String command) {
+		this.actionMethodName = actionMethodName;
+		this.command = command;
+		
+		switch(actionMethodName) {
+		case "join":
+			doJoin();
+			break;
+		case "list":
+			showList();
+			break;
+		default:
+			System.out.println("다시 입력해주세요.");
+			break;
+		}
+	}
 
 	public void doJoin() {
-
 
 		int id = members.size() + 1;
 		String regDate = Util.getNowDateStr();
@@ -63,7 +80,7 @@ public class MemberController {
 		if (members.size() == 0) {
 			System.out.println("등록된 회원이 없습니다.");
 		} else {
-			System.out.printf("번호  |이름    |아이디     |가입날짜     \n");
+			System.out.printf("번호  |이름     |아이디      |가입날짜     \n");
 			for (int i = members.size() - 1; i >= 0; i--) {
 				Member memberlist = members.get(i);
 
@@ -84,5 +101,12 @@ public class MemberController {
 		return true;
 	}
 
-	
+	public void maketestdata2() {
+		System.out.println("==회원 테스트 데이터 생성==");
+		members.add(new Member(1, "user1", "userId1", "userPW1", Util.getNowDateStr(), ""));
+		members.add(new Member(2, "user2", "userId2", "userPW2", Util.getNowDateStr(), ""));
+		members.add(new Member(3, "user3", "userId3", "userPW3", Util.getNowDateStr(), ""));
+
+	}
+
 }
