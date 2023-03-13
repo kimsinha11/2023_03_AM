@@ -1,19 +1,21 @@
 package com.KoreaIT.java.AM;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
+import com.KoreaIT.java.AM.dto.Article;
+import com.KoreaIT.java.AM.dto.Member;
+import com.KoreaIT.java.AM.util.Util;
 
 public class Main {
 
+	static List<Article> articles = new ArrayList<>();
+	static List<Member> members = new ArrayList<>();
+
 	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		int cmd = sc.nextInt();
-		int cmd2 = sc.nextInt();
-		
-		for(int i =0; i<cmd2; i++) {
-			for(int j=0; j<cmd; j++) {
-				System.out.printf("*");
-			} System.out.println();
-		}
+		new App().start();
+
 	}
 
 }
