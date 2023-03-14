@@ -15,4 +15,10 @@ public class Member extends Dto {
 
 	}
 
+	
+
+
+
+
+
 }

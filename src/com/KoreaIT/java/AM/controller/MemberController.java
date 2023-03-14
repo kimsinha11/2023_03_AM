@@ -13,7 +13,6 @@ public class MemberController extends Controller {
 	private String command;
 	private String actionMethodName;
 
-	private Member loginedMember = null;
 
 	int lastMemberId = 0;
 
@@ -47,36 +46,34 @@ public class MemberController extends Controller {
 			break;
 		}
 	}
-	private boolean isLogined() {
-		return loginedMember != null;
-	}
+
 	private void showProfile() {
-		if(isLogined() == false) {
+		if (isLogined() == false) {
 			System.out.println("로그아웃 상태입니다.");
 			return;
 		}
-		
+
 		System.out.println("==현재 로그인한 회원정보==");
-		System.out.printf("로그인 아이디 : %s\n",loginedMember.loginId);
-		System.out.printf("로그인 이름 : %s\n",loginedMember.name);
-		
+		System.out.printf("로그인 아이디 : %s\n", loginedMember.loginId);
+		System.out.printf("로그인 이름 : %s\n", loginedMember.name);
+
 	}
 
 	private void doLogout() {
-		if(isLogined() == false) {
+		if (isLogined() == false) {
 			System.out.println("로그인 후 이용해주세요.");
 			return;
 		}
-		
+
 		loginedMember = null;
 		System.out.println("로그아웃");
 	}
 
 	private void doLogin() {
-		if(isLogined() != false) {
+		if (isLogined() != false) {
 			System.out.println("로그아웃 후 이용해주세요.");
 			return;
-		} 
+		}
 		System.out.print("로그인 아이디 : ");
 		String loginId = sc.nextLine();
 		System.out.print("로그인 비밀번호 : ");
@@ -101,6 +98,10 @@ public class MemberController extends Controller {
 	}
 
 	private void doJoin() {
+		if (isLogined() != false) {
+			System.out.println("로그아웃 후 이용해주세요.");
+			return;
+		}
 		int id = lastMemberId + 1;
 		String regDate = Util.getNowDateStr();
 		String updateDate = Util.getNowDateStr();
@@ -141,6 +142,7 @@ public class MemberController extends Controller {
 		System.out.printf("%d번 회원이 가입되었습니다\n", id);
 		lastMemberId++;
 	}
+
 	public void showList() {
 		if (members.size() == 0) {
 			System.out.println("등록된 회원이 없습니다.");
@@ -155,6 +157,8 @@ public class MemberController extends Controller {
 			}
 		}
 	}
+
+	
 
 	private Member getMemberByLoginId(String loginId) {
 		int index = getMemberIndexByLoginId(loginId);

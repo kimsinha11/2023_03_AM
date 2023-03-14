@@ -5,26 +5,33 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.KoreaIT.java.AM.dto.Article;
+import com.KoreaIT.java.AM.dto.Member;
 import com.KoreaIT.java.AM.util.Util;
 
-public class ArticleController extends Controller{
+public class ArticleController extends Controller {
+
 	private Scanner sc;
 	private List<Article> articles;
+
 	private String command;
 	private String actionMethodName;
-	
+
 	public ArticleController(Scanner sc) {
-		this.articles = new ArrayList<>();
 		this.sc = sc;
-		
+		this.articles = new ArrayList<>();
+
 	}
-	
+
 	public void doAction(String actionMethodName, String command) {
 		this.actionMethodName = actionMethodName;
 		this.command = command;
-		
-		switch(actionMethodName) {
+
+		switch (actionMethodName) {
 		case "write":
+			if (isLogined() == false) {
+				System.out.println("로그인 후 이용해주세요.");
+				return;
+			}
 			doWrite();
 			break;
 		case "list":
@@ -48,6 +55,8 @@ public class ArticleController extends Controller{
 	int lastarticleid = 3;
 
 	public void doWrite() {
+
+
 		int id = lastarticleid + 1;
 		System.out.printf("제목 : ");
 		String title = sc.nextLine();
@@ -113,6 +122,7 @@ public class ArticleController extends Controller{
 					foundArticle.hit);
 		}
 	}
+
 	public void doDelete() {
 		String delete[] = command.split(" ");
 		int id = Integer.parseInt(delete[2]);
@@ -127,7 +137,7 @@ public class ArticleController extends Controller{
 
 		}
 	}
-	
+
 	public void doModify() {
 		String modify[] = command.split(" ");
 		int id = Integer.parseInt(modify[2]);
