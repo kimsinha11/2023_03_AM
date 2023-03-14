@@ -94,7 +94,7 @@ public class MemberController extends Controller {
 		}
 		int id = lastMemberId + 1;
 		String regDate = Util.getNowDateStr();
-		String updateDate = Util.getNowDateStr();
+	
 		String loginId = null;
 		while (true) {
 			System.out.print("로그인 아이디 : ");
@@ -126,7 +126,7 @@ public class MemberController extends Controller {
 		System.out.print("이름 : ");
 		String name = sc.nextLine();
 
-		Member member = new Member(id, name, loginId, loginPw, regDate, updateDate);
+		Member member = new Member(id, name, loginId, loginPw, regDate);
 		members.add(member);
 
 		System.out.printf("%d번 회원이 가입되었습니다\n", id);
@@ -183,9 +183,9 @@ public class MemberController extends Controller {
 
 	public void maketestdata() {
 		System.out.println("==회원 테스트 데이터 생성==");
-		members.add(new Member(1, "user1", "a", "a", Util.getNowDateStr(), ""));
-		members.add(new Member(2, "user2", "b", "b", Util.getNowDateStr(), ""));
-		members.add(new Member(3, "user3", "c", "c", Util.getNowDateStr(), ""));
+		members.add(new Member(1, "user1", "a", "a", Util.getNowDateStr()));
+		members.add(new Member(2, "user2", "b", "b", Util.getNowDateStr()));
+		members.add(new Member(3, "user3", "c", "c", Util.getNowDateStr()));
 
 	}
 }
