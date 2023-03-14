@@ -5,7 +5,7 @@ import com.KoreaIT.java.AM.dto.Member;
 public abstract class Controller {
 	public static Member loginedMember = null;
 
-	public boolean isLogined() {
+	public static boolean isLogined() {
 		return loginedMember != null;
 	}
 

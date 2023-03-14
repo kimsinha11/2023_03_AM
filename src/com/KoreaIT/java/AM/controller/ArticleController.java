@@ -1,5 +1,6 @@
 package com.KoreaIT.java.AM.controller;
 
+import java.nio.channels.MembershipKey;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -28,12 +29,7 @@ public class ArticleController extends Controller {
 
 		switch (actionMethodName) {
 		case "write":
-			if (isLogined() == false) {
-				System.out.println("로그인 후 이용해주세요.");
-				return;
-			}
 			doWrite();
-
 			break;
 		case "list":
 			showList();
@@ -42,17 +38,9 @@ public class ArticleController extends Controller {
 			showDetail();
 			break;
 		case "delete":
-			if (isLogined() == false) {
-				System.out.println("로그인 후 이용해주세요.");
-				return;
-			}
 			doDelete();
 			break;
 		case "modify":
-			if (isLogined() == false) {
-				System.out.println("로그인 후 이용해주세요.");
-				return;
-			}
 			doModify();
 			break;
 		default:
