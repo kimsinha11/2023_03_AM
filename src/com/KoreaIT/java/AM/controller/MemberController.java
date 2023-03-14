@@ -1,5 +1,6 @@
 package com.KoreaIT.java.AM.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -12,8 +13,8 @@ public class MemberController extends Controller{
 	private String command;
 	private String actionMethodName;
 	
-	public MemberController(List<Member> members, Scanner sc) {
-		this.members = members;
+	public MemberController(Scanner sc) {
+		this.members =new ArrayList<>();
 		this.sc = sc;
 	}
 	public void doAction(String actionMethodName, String command) {
@@ -27,11 +28,15 @@ public class MemberController extends Controller{
 		case "list":
 			showList();
 			break;
+		case "login":
+			doLogin();
+			break;
 		default:
 			System.out.println("다시 입력해주세요.");
 			break;
 		}
 	}
+
 
 	public void doJoin() {
 
@@ -90,11 +95,51 @@ public class MemberController extends Controller{
 			}
 		}
 	}
+	
+	public void doLogin() {
 
+		String loginId = null;
+		while (true) {
+			System.out.printf("로그인 아이디 : ");
+			loginId = sc.nextLine();
+			
+				if (getMemberById(loginId) != false) {
+					System.out.printf("존재하지 않는 아이디입니다.\n");
+					break;
+				} else {
+				
+			}
+
+		}
+		
+		String loginPw = null;
+
+		while (true) {
+			System.out.printf("로그인 비밀번호 : ");
+			loginPw = sc.nextLine();
+
+			if(getMemberByPw(loginPw) != false){
+				System.out.println("비밀번호가 틀렸습니다.\n");
+				continue;
+			}
+			break;
+		}
+		System.out.printf("%s 로그인 성공\n", loginId);
+	}
+	
 	public boolean getMemberById(String loginId) {
 		for (Member member : members) {
 
 			if (member.loginId.equals(loginId)) {
+				return false;
+			}
+		}
+		return true;
+	}
+	public boolean getMemberByPw(String loginPw) {
+		for (Member member : members) {
+
+			if (member.loginPw.equals(loginPw)) {
 				return false;
 			}
 		}

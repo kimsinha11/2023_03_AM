@@ -1,31 +1,20 @@
 package com.KoreaIT.java.AM;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 import com.KoreaIT.java.AM.controller.ArticleController;
 import com.KoreaIT.java.AM.controller.Controller;
 import com.KoreaIT.java.AM.controller.MemberController;
-import com.KoreaIT.java.AM.dto.Article;
-import com.KoreaIT.java.AM.dto.Member;
 
 public class App {
-	static List<Article> articles;
-	static List<Member> members;
-
-	public App() {
-		articles = new ArrayList<>();
-		members = new ArrayList<>();
-	}
 
 	public void start() {
 
 		System.out.println("==프로그램 시작==");
 
 		Scanner sc = new Scanner(System.in);
-		MemberController memberController = new MemberController(members, sc);
-		ArticleController articleController = new ArticleController(articles, sc);
+		MemberController memberController = new MemberController(sc);
+		ArticleController articleController = new ArticleController(sc);
 		
 		Controller controller;
 		
