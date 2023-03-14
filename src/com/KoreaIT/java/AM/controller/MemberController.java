@@ -69,6 +69,7 @@ public class MemberController extends Controller {
 	private void doJoin() {
 		int id = lastMemberId + 1;
 		String regDate = Util.getNowDateStr();
+		String updateDate = Util.getNowDateStr();
 		String loginId = null;
 		while (true) {
 			System.out.print("로그인 아이디 : ");
@@ -100,7 +101,7 @@ public class MemberController extends Controller {
 		System.out.print("이름 : ");
 		String name = sc.nextLine();
 
-		Member member = new Member(id, regDate, regDate, loginId, loginPw, name);
+		Member member = new Member(id, name, loginId, loginPw, regDate, updateDate);
 		members.add(member);
 
 		System.out.printf("%d번 회원이 가입되었습니다\n", id);
