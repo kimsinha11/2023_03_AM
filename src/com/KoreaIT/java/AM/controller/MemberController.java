@@ -193,9 +193,9 @@ public class MemberController extends Controller {
 
 	public void maketestdata() {
 		System.out.println("==회원 테스트 데이터 생성==");
-		members.add(new Member(1, "user1", "userId1", "userPW1", Util.getNowDateStr(), ""));
-		members.add(new Member(2, "user2", "userId2", "userPW2", Util.getNowDateStr(), ""));
-		members.add(new Member(3, "user3", "userId3", "userPW3", Util.getNowDateStr(), ""));
+		members.add(new Member(1, "user1", "a", "a", Util.getNowDateStr(), ""));
+		members.add(new Member(2, "user2", "b", "b", Util.getNowDateStr(), ""));
+		members.add(new Member(3, "user3", "c", "c", Util.getNowDateStr(), ""));
 
 	}
 }
