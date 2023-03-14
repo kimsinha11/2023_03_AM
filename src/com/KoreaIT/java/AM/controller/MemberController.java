@@ -7,21 +7,22 @@ import java.util.Scanner;
 import com.KoreaIT.java.AM.dto.Member;
 import com.KoreaIT.java.AM.util.Util;
 
-public class MemberController extends Controller{
+public class MemberController extends Controller {
 	List<Member> members;
 	private Scanner sc;
 	private String command;
 	private String actionMethodName;
-	
+
 	public MemberController(Scanner sc) {
-		this.members =new ArrayList<>();
+		this.members = new ArrayList<>();
 		this.sc = sc;
 	}
+
 	public void doAction(String actionMethodName, String command) {
 		this.actionMethodName = actionMethodName;
 		this.command = command;
-		
-		switch(actionMethodName) {
+
+		switch (actionMethodName) {
 		case "join":
 			doJoin();
 			break;
@@ -37,8 +38,7 @@ public class MemberController extends Controller{
 		}
 	}
 
-
-	public void doJoin() {
+	private void doJoin() {
 
 		int id = members.size() + 1;
 		String regDate = Util.getNowDateStr();
@@ -95,38 +95,33 @@ public class MemberController extends Controller{
 			}
 		}
 	}
-	
+
 	public void doLogin() {
 
 		String loginId = null;
+		String loginPw = null;
 		while (true) {
 			System.out.printf("로그인 아이디 : ");
 			loginId = sc.nextLine();
-			
-				if (getMemberById(loginId) != false) {
-					System.out.printf("존재하지 않는 아이디입니다.\n");
-					break;
+			if (getMemberById(loginId) == false) {
+				System.out.printf("로그인 비밀번호 : ");
+				loginPw = sc.nextLine();
+				if (getMemberByPw(loginPw) != false) {
+					System.out.println("비밀번호가 틀렸습니다.");
+					continue;
 				} else {
-				
+					System.out.printf("%s 로그인 성공\n", loginId);
+					break;
+
+				}
+
+			} else {
+				System.out.println("아이디가 없습니다.");
 			}
 
 		}
-		
-		String loginPw = null;
-
-		while (true) {
-			System.out.printf("로그인 비밀번호 : ");
-			loginPw = sc.nextLine();
-
-			if(getMemberByPw(loginPw) != false){
-				System.out.println("비밀번호가 틀렸습니다.\n");
-				continue;
-			}
-			break;
-		}
-		System.out.printf("%s 로그인 성공\n", loginId);
 	}
-	
+
 	public boolean getMemberById(String loginId) {
 		for (Member member : members) {
 
@@ -136,6 +131,7 @@ public class MemberController extends Controller{
 		}
 		return true;
 	}
+
 	public boolean getMemberByPw(String loginPw) {
 		for (Member member : members) {
 
