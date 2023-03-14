@@ -13,7 +13,7 @@ public class MemberController extends Controller {
 	private String command;
 	private String actionMethodName;
 
-	private Member loginedMember;
+	private Member loginedMember = null;
 
 	int lastMemberId = 0;
 
@@ -36,13 +36,47 @@ public class MemberController extends Controller {
 		case "list":
 			showList();
 			break;
+		case "profile":
+			showProfile();
+			break;
+		case "logout":
+			doLogout();
+			break;
 		default:
 			System.out.println("해당 기능은 사용할 수 없습니다");
 			break;
 		}
 	}
+	private boolean isLogined() {
+		return loginedMember != null;
+	}
+	private void showProfile() {
+		if(isLogined() == false) {
+			System.out.println("로그아웃 상태입니다.");
+			return;
+		}
+		
+		System.out.println("==현재 로그인한 회원정보==");
+		System.out.printf("로그인 아이디 : %s\n",loginedMember.loginId);
+		System.out.printf("로그인 이름 : %s\n",loginedMember.name);
+		
+	}
+
+	private void doLogout() {
+		if(isLogined() == false) {
+			System.out.println("로그인 후 이용해주세요.");
+			return;
+		}
+		
+		loginedMember = null;
+		System.out.println("로그아웃");
+	}
 
 	private void doLogin() {
+		if(isLogined() != false) {
+			System.out.println("로그아웃 후 이용해주세요.");
+			return;
+		} 
 		System.out.print("로그인 아이디 : ");
 		String loginId = sc.nextLine();
 		System.out.print("로그인 비밀번호 : ");
@@ -153,7 +187,7 @@ public class MemberController extends Controller {
 		return -1;
 	}
 
-	public void maketestdata2() {
+	public void maketestdata() {
 		System.out.println("==회원 테스트 데이터 생성==");
 		members.add(new Member(1, "user1", "userId1", "userPW1", Util.getNowDateStr(), ""));
 		members.add(new Member(2, "user2", "userId2", "userPW2", Util.getNowDateStr(), ""));

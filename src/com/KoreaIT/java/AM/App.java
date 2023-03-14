@@ -19,7 +19,7 @@ public class App {
 		Controller controller;
 		
 		articleController.maketestdata();
-		memberController.maketestdata2();
+		memberController.maketestdata();
 
 		while (true) {
 			System.out.printf("명령어 >> ");
