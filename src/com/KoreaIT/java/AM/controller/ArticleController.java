@@ -49,8 +49,6 @@ public class ArticleController extends Controller {
 		}
 	}
 
-
-
 	public void doWrite() {
 //중요한 데이터를 컨트롤러가 아니라 dao에서 일하도록 
 		int id = Container.articleDao.setNewId();
@@ -63,9 +61,8 @@ public class ArticleController extends Controller {
 
 		Article article = new Article(id, loginedMember.id, title, body, regDate, updateDate);
 		Container.articleDao.add(article);
-		
+
 		System.out.printf("%d번 게시물이 등록되었습니다.\n", id);
-	
 
 	}
 
@@ -122,13 +119,25 @@ public class ArticleController extends Controller {
 			System.out.printf("%d번 게시물은 존재하지 않습니다.\n", id);
 			return;
 		}
+		for (int i = articles.size() - 1; i >= 0; i--) {
+			String writer = null;
 
-		else {
+			List<Member> members = Container.memberDao.members;
+			Article article = articles.get(i);
+
+			for (int j = 0; j < members.size(); j++) {
+				Member member = members.get(j);
+				if (member.id == article.memberId) {
+					writer = member.name;
+
+				}
+			}
 			foundArticle.hit++;
-			System.out.printf("번호 : %d\n제목 : %s\n내용 : %s\n작성자 : %d\n등록날짜 : %s\n수정날짜 : %s\n조회수 : %d\n", foundArticle.id,
-					foundArticle.title, foundArticle.body, foundArticle.memberId, foundArticle.regDate,
-					foundArticle.updateDate, foundArticle.hit);
+			System.out.printf("번호 : %d\n제목 : %s\n내용 : %s\n작성자 : %s\n등록날짜 : %s\n수정날짜 : %s\n조회수 : %d\n", foundArticle.id,
+					foundArticle.title, foundArticle.body, writer, foundArticle.regDate, foundArticle.updateDate,
+					foundArticle.hit);
 		}
+
 	}
 
 	public void doDelete() {

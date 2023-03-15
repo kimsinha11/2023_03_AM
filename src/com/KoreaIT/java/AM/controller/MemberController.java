@@ -63,11 +63,29 @@ public class MemberController extends Controller {
 	}
 
 	private void doLogin() {
+		String loginId = null;
+		String loginPw = null;
+		while (true) {
+			System.out.print("로그인 아이디 : ");
+			loginId = sc.nextLine().trim();
 
-		System.out.print("로그인 아이디 : ");
-		String loginId = sc.nextLine();
-		System.out.print("로그인 비밀번호 : ");
-		String loginPw = sc.nextLine();
+			if (loginId.length() == 0) {
+				System.out.println("아이디를 입력해주세요.");
+				continue;
+			}
+			break;
+		}
+
+		while (true) {
+			System.out.print("로그인 비밀번호 : ");
+			loginPw = sc.nextLine().trim();
+
+			if (loginPw.length() == 0) {
+				System.out.println("비밀번호를 입력해주세요");
+				continue;
+			}
+			break;
+		}
 
 		// 얘 있나? (사용자가 입력한 아이디랑 일치하는 회원이 우리한테 있나?)
 
@@ -92,13 +110,19 @@ public class MemberController extends Controller {
 			System.out.println("로그아웃 후 이용해주세요.");
 			return;
 		}
-		int id = Container.memberDao.setNewId();;
+		System.out.println("**회원가입 필수정보 : 아이디, 비밀번호, 이름**");
+		int id = Container.memberDao.setNewId();
+		
 		String regDate = Util.getNowDateStr();
 
 		String loginId = null;
 		while (true) {
 			System.out.print("로그인 아이디 : ");
 			loginId = sc.nextLine();
+			if (loginId.length() == 0) {
+				System.out.println("아이디를 입력해주세요");
+				continue;
+			}
 
 			if (isJoinableLoginId(loginId) == false) {
 				System.out.println("이미 사용중인 아이디입니다");
@@ -109,10 +133,14 @@ public class MemberController extends Controller {
 
 		String loginPw = null;
 		String loginPwConfirm = null;
-
 		while (true) {
 			System.out.print("로그인 비밀번호 : ");
 			loginPw = sc.nextLine();
+
+			if (loginPw.length() == 0) {
+				System.out.println("비밀번호를 입력해주세요.");
+				continue;
+			}
 			System.out.print("로그인 비밀번호 확인: ");
 			loginPwConfirm = sc.nextLine();
 
@@ -121,16 +149,25 @@ public class MemberController extends Controller {
 				continue;
 			}
 			break;
-		}
 
-		System.out.print("이름 : ");
-		String name = sc.nextLine();
+		}
+		
+		String name = null;
+		while (true) {
+			System.out.print("이름 : ");
+			name = sc.nextLine();
+			if (name.length() == 0) {
+				System.out.println("이름을 입력해주세요.");
+				continue;
+			}
+			break;
+		}
 
 		Member member = new Member(id, name, loginId, loginPw, regDate);
 		Container.memberDao.add(member);
 
 		System.out.printf("%d번 회원이 가입되었습니다\n", id);
-		
+
 	}
 
 	public void showList() {
