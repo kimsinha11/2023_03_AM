@@ -19,7 +19,7 @@ public class MemberController extends Controller {
 	public MemberController(Scanner sc) {
 		this.members = Container.memberDao.members;
 		this.sc = sc;
-	}
+	} 
 
 	public void doAction(String actionMethodName, String command) {
 		this.command = command;
