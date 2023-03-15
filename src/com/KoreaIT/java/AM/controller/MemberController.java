@@ -19,7 +19,7 @@ public class MemberController extends Controller {
 	public MemberController(Scanner sc) {
 		this.members = Container.memberDao.members;
 		this.sc = sc;
-	} 
+	}
 
 	public void doAction(String actionMethodName, String command) {
 		this.command = command;
@@ -48,22 +48,22 @@ public class MemberController extends Controller {
 	}
 
 	private void showProfile() {
-		
 
 		System.out.println("==현재 로그인한 회원정보==");
+		System.out.printf("나의 회원번호 : %d\n", loginedMember.id);
 		System.out.printf("로그인 아이디 : %s\n", loginedMember.loginId);
 		System.out.printf("로그인 이름 : %s\n", loginedMember.name);
 
 	}
 
 	private void doLogout() {
-		
+
 		loginedMember = null;
 		System.out.println("로그아웃");
 	}
 
 	private void doLogin() {
-		
+
 		System.out.print("로그인 아이디 : ");
 		String loginId = sc.nextLine();
 		System.out.print("로그인 비밀번호 : ");
@@ -92,9 +92,9 @@ public class MemberController extends Controller {
 			System.out.println("로그아웃 후 이용해주세요.");
 			return;
 		}
-		int id = lastMemberId + 1;
+		int id = Container.memberDao.setNewId();;
 		String regDate = Util.getNowDateStr();
-	
+
 		String loginId = null;
 		while (true) {
 			System.out.print("로그인 아이디 : ");
@@ -127,10 +127,10 @@ public class MemberController extends Controller {
 		String name = sc.nextLine();
 
 		Member member = new Member(id, name, loginId, loginPw, regDate);
-		members.add(member);
+		Container.memberDao.add(member);
 
 		System.out.printf("%d번 회원이 가입되었습니다\n", id);
-		lastMemberId++;
+		
 	}
 
 	public void showList() {
@@ -147,8 +147,6 @@ public class MemberController extends Controller {
 			}
 		}
 	}
-
-	
 
 	private Member getMemberByLoginId(String loginId) {
 		int index = getMemberIndexByLoginId(loginId);
@@ -183,9 +181,9 @@ public class MemberController extends Controller {
 
 	public void maketestdata() {
 		System.out.println("==회원 테스트 데이터 생성==");
-		members.add(new Member(1, "user1", "a", "a", Util.getNowDateStr()));
-		members.add(new Member(2, "user2", "b", "b", Util.getNowDateStr()));
-		members.add(new Member(3, "user3", "c", "c", Util.getNowDateStr()));
+		Container.memberDao.add(new Member(1, "user1", "a", "a", Util.getNowDateStr()));
+		Container.memberDao.add(new Member(2, "user2", "b", "b", Util.getNowDateStr()));
+		Container.memberDao.add(new Member(3, "user3", "c", "c", Util.getNowDateStr()));
 
 	}
 }
