@@ -1,10 +1,10 @@
 package com.KoreaIT.java.AM.controller;
 
-import java.nio.channels.MembershipKey;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import com.KoreaIT.java.AM.container.Container;
 import com.KoreaIT.java.AM.dto.Article;
 import com.KoreaIT.java.AM.dto.Member;
 import com.KoreaIT.java.AM.util.Util;
@@ -19,7 +19,7 @@ public class ArticleController extends Controller {
 
 	public ArticleController(Scanner sc) {
 		this.sc = sc;
-		this.articles = new ArrayList<>();
+		this.articles = Container.articleDao.articles;
 
 	}
 
@@ -60,6 +60,7 @@ public class ArticleController extends Controller {
 		String body = sc.nextLine();
 		String regDate = Util.getNowDateStr();
 		String updateDate = "";
+		
 
 		Article article = new Article(id, loginedMember.id, title, body, regDate, updateDate);
 		articles.add(article);
@@ -92,7 +93,10 @@ public class ArticleController extends Controller {
 				return;
 			}
 		}
-
+		
+		String writer = null;
+		List<Member> members = Container.memberDao.members;
+		
 		System.out.println(" 번호  //   제목    //  작성자  //         작성날짜          //  조회수  ");
 		for (int i = forPrintArticles.size() - 1; i >= 0; i--) {
 			Article article = forPrintArticles.get(i);
@@ -177,8 +181,8 @@ public class ArticleController extends Controller {
 	public void maketestdata() {
 		System.out.println("==게시물 테스트 데이터 생성==");
 		articles.add(new Article(1, 3, "제목1", "제목1", Util.getNowDateStr(), "", 11));
-		articles.add(new Article(2, 1, "제목2", "제목2", Util.getNowDateStr(), "", 22));
-		articles.add(new Article(3, 2, "제목3", "제목3", Util.getNowDateStr(), "", 33));
+		articles.add(new Article(2, 1,"제목2", "제목2", Util.getNowDateStr(), "", 22));
+		articles.add(new Article(3, 2,"제목3", "제목3", Util.getNowDateStr(), "", 33));
 
 	}
 }
