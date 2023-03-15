@@ -1,6 +1,5 @@
 package com.KoreaIT.java.AM.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -13,7 +12,7 @@ import com.KoreaIT.java.AM.util.Util;
 public class ArticleController extends Controller {
 
 	private Scanner sc;
-	private List<Article> articles;
+
 
 	private String command;
 	private String actionMethodName;
