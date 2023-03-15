@@ -21,7 +21,47 @@ public class ArticleDao extends Dao {
 		lastId++;
 	}
 
-	public int setNewId() {
-		return lastId+1;
+	public void remove(Article foundArticle) {
+		articles.remove(foundArticle);
+
 	}
+
+	public int setNewId() {
+		return lastId + 1;
+	}
+
+	public Article getArticleById(int id) {
+			
+			for (int i = 0; i < articles.size(); i++) {
+				Article article = articles.get(i);
+				if (article.id == id) {
+					return article;
+				}
+			}
+			
+			return null;
+
+
+	}
+
+	public List<Article> getArticles(String searchKeyword) {
+		if (searchKeyword.length() != 0 && searchKeyword != null) {
+			System.out.println("searchKeyword : " + searchKeyword);
+			List<Article> forPrintArticles = new ArrayList<>();
+
+			if (searchKeyword.length() > 0) {
+
+				for (Article article : articles) {
+					if (article.title.contains(searchKeyword)) {
+						forPrintArticles.add(article);
+					}
+				}
+			}
+
+			return forPrintArticles;
+		}
+
+		return articles;
+	}
+
 }
