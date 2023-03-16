@@ -8,10 +8,6 @@ import com.KoreaIT.java.AM.dto.Article;
 public class ArticleDao extends Dao {
 	public List<Article> articles;
 
-	public int getLastId() {
-		return lastId;
-	}
-
 	public ArticleDao() {
 		articles = new ArrayList<>();
 	}
@@ -23,33 +19,44 @@ public class ArticleDao extends Dao {
 
 	public void remove(Article foundArticle) {
 		articles.remove(foundArticle);
+	}
 
+	public int getLastId() {
+		return lastId;
 	}
 
 	public int setNewId() {
 		return lastId + 1;
 	}
 
-	public Article getArticleById(int id) {
-
-		for (int i = 0; i < articles.size(); i++) {
-			Article article = articles.get(i);
+	public int getArticleIndexById(int id) {
+		int i = 0;
+		for (Article article : articles) {
 			if (article.id == id) {
-				return article;
+				return i;
 			}
+			i++;
+		}
+		return -1;
+	}
+
+	public Article getArticleById(int id) {
+		int index = getArticleIndexById(id);
+
+		if (index != -1) {
+			return articles.get(index);
 		}
 
 		return null;
-
 	}
 
 	public List<Article> getArticles(String searchKeyword) {
-		if (searchKeyword.length() != 0 && searchKeyword != null) {
+		if (searchKeyword != null && searchKeyword.length() != 0) {
 			System.out.println("searchKeyword : " + searchKeyword);
+
 			List<Article> forPrintArticles = new ArrayList<>();
 
 			if (searchKeyword.length() > 0) {
-
 				for (Article article : articles) {
 					if (article.title.contains(searchKeyword)) {
 						forPrintArticles.add(article);
@@ -59,7 +66,6 @@ public class ArticleDao extends Dao {
 
 			return forPrintArticles;
 		}
-
 		return articles;
 	}
 

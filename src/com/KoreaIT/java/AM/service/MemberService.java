@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.KoreaIT.java.AM.container.Container;
 import com.KoreaIT.java.AM.dao.MemberDao;
-
 import com.KoreaIT.java.AM.dto.Member;
 
 public class MemberService {
@@ -40,5 +39,10 @@ public class MemberService {
 	public List<Member> getMembers() {
 
 		return memberDao.getMembers();
+	}
+
+	public String getMemberNameById(int memberId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

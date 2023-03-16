@@ -59,7 +59,7 @@ public class ArticleController extends Controller {
 		String title = sc.nextLine();
 		System.out.printf("내용 : ");
 		String body = sc.nextLine();
-		String regDate = Util.getNowDateStr();
+		String regDate = Util.getNowDateTimeStr();
 		String updateDate = "";
 
 		Article article = new Article(id, loginedMember.id, title, body, regDate, updateDate);
@@ -156,7 +156,7 @@ public class ArticleController extends Controller {
 			String title = sc.nextLine();
 			System.out.printf("내용 : ");
 			String body = sc.nextLine();
-			String updateDate = Util.getNowDateStr();
+			String updateDate = Util.getNowDateTimeStr();
 
 			foundArticle.title = title;
 			foundArticle.body = body;
@@ -171,9 +171,9 @@ public class ArticleController extends Controller {
 
 	public void maketestdata() {
 		System.out.println("==게시물 테스트 데이터 생성==");
-		articleService.add(new Article(1, 3, "제목1", "제목1", Util.getNowDateStr(), "", 11));
-		articleService.add(new Article(2, 1, "제목2", "제목2", Util.getNowDateStr(), "", 22));
-		articleService.add(new Article(3, 2, "제목3", "제목3", Util.getNowDateStr(), "", 33));
+		articleService.add(new Article(1, 3, "제목1", "제목1", Util.getNowDateTimeStr(), "", 11));
+		articleService.add(new Article(2, 1, "제목2", "제목2", Util.getNowDateTimeStr(), "", 22));
+		articleService.add(new Article(3, 2, "제목3", "제목3", Util.getNowDateTimeStr(), "", 33));
 
 	}
 }

@@ -15,8 +15,8 @@ public class ArticleService {
 	public List<Article> getforPrintArticles(String searchKeyword) {
 		List<Article> articles = Container.articleDao.getArticles(searchKeyword);
 		return articles;
-	}
-
+	} 
+	
 	public int setNewId() {
 		
 		int id = articleDao.setNewId();
@@ -33,6 +33,10 @@ public class ArticleService {
 	public void remove(Article foundArticle) {
 		articleDao.remove(foundArticle);
 		
+	}
+	public List<Article> getForPrintArticles() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
