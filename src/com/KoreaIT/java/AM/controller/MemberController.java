@@ -177,12 +177,12 @@ public class MemberController extends Controller {
 	}
 
 	public void showList() {
-		if (memberService.size() == 0) {
+		if (memberService.getMembers().size() == 0) {
 			System.out.println("등록된 회원이 없습니다.");
 		} else {
 			System.out.printf("번호  |이름     |아이디      |가입날짜     \n");
-			for (int i = memberService.size() - 1; i >= 0; i--) {
-				Member memberlist = memberService.get(i);
+			for (int i = memberService.getMembers().size() - 1; i >= 0; i--) {
+				Member memberlist = memberService.getMembers().get(i);
 
 				System.out.printf("%d    |%s   |%s    |%s  \n", memberlist.id, memberlist.name, memberlist.loginId,
 						memberlist.regDate);

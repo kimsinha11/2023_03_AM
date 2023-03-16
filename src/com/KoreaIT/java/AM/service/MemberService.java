@@ -1,5 +1,7 @@
 package com.KoreaIT.java.AM.service;
 
+import java.util.List;
+
 import com.KoreaIT.java.AM.container.Container;
 import com.KoreaIT.java.AM.dao.MemberDao;
 
@@ -33,13 +35,10 @@ public class MemberService {
 		return memberDao.isJoinableLoginId(loginId);
 	}
 
-	public int size() {
 
-		return memberDao.members.size();
-	}
 
-	public Member get(int i) {
+	public List<Member> getMembers() {
 
-		return memberDao.members.get(i);
+		return memberDao.getMembers();
 	}
 }

@@ -57,4 +57,9 @@ public class MemberDao extends Dao {
 		}
 		return -1;
 	}
+
+	public List<Member> getMembers() {
+
+		return members;
+	}
 }
